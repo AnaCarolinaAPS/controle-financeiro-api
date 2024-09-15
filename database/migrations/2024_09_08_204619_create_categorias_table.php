@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->text('descricao')->nullable();
+            $table->enum('tipo', ['renda', 'investimento', 'despesa', 'gasto'])->nullable();
+            $table->unsignedBigInteger('categoria_id')->nullable(); //para subcategorias
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

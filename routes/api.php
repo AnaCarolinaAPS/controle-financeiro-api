@@ -20,7 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/categorias', [CategoriaController::class, 'index']);
-    Route::get('/categorias/{user}', [CategoriaController::class, 'show']);
+
+    // Rotas das Categorias e Subcategorias
+    Route::prefix('/categorias')->group(function () {
+        Route::get('/', [CategoriaController::class, 'index'])->name('shippers.index');
+        Route::post('/', [CategoriaController::class, 'store'])->name('shippers.store');
+        Route::get('/{categoria}', [CategoriaController::class, 'show'])->name('shippers.show');
+        Route::put('/{categoria}', [CategoriaController::class, 'update'])->name('shippers.update');
+        Route::delete('/{categoria}', [CategoriaController::class, 'destroy'])->name('shippers.destroy');
+    });
 });
 
