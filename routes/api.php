@@ -20,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/categorias', [CategoriaController::class, 'index']);
-    Route::get('/categorias/{user}', [CategoriaController::class, 'show']);
+
+    // Rotas das Categorias e Subcategorias
+    Route::apiResource('categorias', CategoriaController::class);
+
 });
 
